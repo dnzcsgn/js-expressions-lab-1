@@ -1,48 +1,4 @@
-//! Start by creating the variables for the data recorded
-//* Then work on the conversion of the temperature from Celsius to Fahrenheit (or viceversa)
 
-
-//! Start the calculation of the total temperatures
-//* Then apply the conversion to calculate the total in the other unit of measurement
-//* Call the variables: tot_temperature_in_fahrenheit and tot_temperature_in_celsius
-
-//! Start the calculation of the average temperatures
-//* Call the variables: avg_temperature_in_fahrenheit and avg_temperature_in_celsius
-
-//! Console.log the results for your own inspection if you'd like
-
-//! After creating the four variables mentioned above, uncomment the following lines
-//* This way you can export them to the test file, this is essential for the tests to work
-
-module.exports = {
-    // tot_temperature_in_fahrenheit,
-    // tot_temperature_in_celsius,
-    // avg_temperature_in_fahrenheit,
-    // avg_temperature_in_celsius
-};
-
-//! Start by creating the variables for the data recorded
-//* Then work on the conversion of the temperature from Celsius to Fahrenheit (or viceversa)
-
-
-//! Start the calculation of the total temperatures
-//* Then apply the conversion to calculate the total in the other unit of measurement
-//* Call the variables: tot_temperature_in_fahrenheit and tot_temperature_in_celsius
-
-//! Start the calculation of the average temperatures
-//* Call the variables: avg_temperature_in_fahrenheit and avg_temperature_in_celsius
-
-//! Console.log the results for your own inspection if you'd like
-
-//! After creating the four variables mentioned above, uncomment the following lines
-//* This way you can export them to the test file, this is essential for the tests to work
-
-module.exports = {
-    // tot_temperature_in_fahrenheit,
-    // tot_temperature_in_celsius,
-    // avg_temperature_in_fahrenheit,
-    // avg_temperature_in_celsius
-};
 // Define variables:
 const day1TempF = 32
 const day2TempC = 25
@@ -75,25 +31,42 @@ const day28TempC = 17
 const day29TempF = 76
 const day30TempC = 29
 
-function fahrenheitToCelcius(fahrenheit) {
-    return celcius = (fahrenheit-32) * 5 / 9
+function fahrenheitToCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
 }
-function celciusToFahrenheit(celcius) {
-    return fahrenheit = (celcius* 9 / 5) + 32 
+
+function celsiusToFahrenheit(celsius) {
+    return (celsius * 9 / 5) + 32;
 }
-//Divided temperature values. 
+
 const fahrenheitTemps = [32, 70, 80, 72, 68, 75, 82, 65, 77, 78, 73, 79, 71, 74, 76];
-const celciusTemps = [25, 18, 15, 28, 20, 23, 30, 22, 26, 24, 21, 27, 19, 17, 29];
+const celsiusTemps = [25, 18, 15, 28, 20, 23, 30, 22, 26, 24, 21, 27, 19, 17, 29];
 
-//Calculations of the total temparatures.
-const tot_temperature_in_fahrenheit = fahrenheitTemps.reduce((total, temp) => total + temp, 0);
-const tot_temperature_in_celsius = celciusTemps.reduce((total, temp) => total + temp, 0);
+// Step 1: Convert all Celsius temps to Fahrenheit
+const convertedCelsiusToF = celsiusTemps.map(celsiusToFahrenheit);
 
-//Calculation of the average temperatures.
-const avg_temperature_in_fahrenheit = tot_temperature_in_fahrenheit / fahrenheitTemps.length;
-const avg_temperature_in_celsius = tot_temperature_in_celsius / celciusTemps.length;
+// Step 2: Combine all temps into Fahrenheit
+const allTempsF = fahrenheitTemps.concat(convertedCelsiusToF);
 
+// Step 3: Total in Fahrenheit
+const tot_temperature_in_fahrenheit = allTempsF.reduce((sum, temp) => sum + temp, 0);
+
+// Step 4: Convert total F to total C
+const tot_temperature_in_celsius = fahrenheitToCelsius(tot_temperature_in_fahrenheit);
+
+// Step 5: Averages
+const avg_temperature_in_fahrenheit = tot_temperature_in_fahrenheit / 30;
+const avg_temperature_in_celsius = tot_temperature_in_celsius / 30;
+
+// Debug logs (optional)
 console.log('Total temperature in Fahrenheit:', tot_temperature_in_fahrenheit);
 console.log('Total temperature in Celsius:', tot_temperature_in_celsius);
 console.log('Average temperature in Fahrenheit:', avg_temperature_in_fahrenheit);
 console.log('Average temperature in Celsius:', avg_temperature_in_celsius);
+
+module.exports = {
+    tot_temperature_in_fahrenheit,
+    tot_temperature_in_celsius,
+    avg_temperature_in_fahrenheit,
+    avg_temperature_in_celsius
+};
